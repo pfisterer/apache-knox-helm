@@ -42,16 +42,23 @@ The following table lists the configurable parameters of the Apache Knox chart a
 | `knox.gateway.logLevel`          | Log4j log level for the gateway component | `DEBUG`                                                                           |
 | `knox.ldap.logLevel`             | Log4j log level for the LDAP server       | `INFO`                                                                            |
 
-## Open Issues
+## Helm repository
 
-- Enable the readiness probe in <templates/knox-dep.yaml> (requires authentication)
-- Support additional services (not just HDFS)
+Available here: <https://pfisterer.github.io/apache-knox-helm/>
+
 
 ## Related Charts
 
 - The [Hadoop Chart](https://github.com/helm/charts/tree/master/stable/hadoop)
 
 ## Development
+
+Help is always appreciated. Please create pull requests.
+
+### Open Issues
+
+- Enable the readiness probe in <templates/knox-dep.yaml> (requires authentication)
+- Support additional services (not just HDFS)
 
 ### Upload a new version of the chart
 
