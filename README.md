@@ -9,13 +9,13 @@ Make sure that your Hadoop installation has WebHDFS enabled (by setting `hdfs.we
 To install the chart with the release name `knox`:
 
 ```
-$ helm install --name knox stable/knox
+$ helm install --name knox pfisterer/apache-knox-helm
 ```
 
 For correctly proxying to your HDFS instance, set `knox.hadoop.nameNodeUrl`, `knox.hadoop.resourceManagerUrl`, and `knox.hadoop.webHdfsUrl`. Example: 
 
 ```
-$ helm install --name knox stable/knox \
+$ helm install --name knox pfisterer/apache-knox-helm \
 		--set "knox.hadoop.nameNodeUrl=hdfs://your-namenode-svc:9000/"  \
 		--set "knox.hadoop.resourceManagerUrl=http://your-resource-mgr-svc:8088/ws" \
 		--set "knox.hadoop.webHdfsUrl=http://your-namenode-svc:50070/webhdfs"
