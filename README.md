@@ -2,9 +2,9 @@
 
 [Apache Knox](https://knox.apache.org/) is an Application Gateway for interacting with the REST APIs and UIs of Apache Hadoop deployments. This chart is primarily intended to access HDFS from outside a Kubernetes cluster using simple REST APIs.
 
-## Installing the Chart (requires an existing [Hadoop](../hadoop/) deployment)
+## Installing the Chart (requires an existing Hadoop deployment)
 
-Make sure that your Hadoop installation has WebHDFS enabled (by setting `hdfs.webhdfs.enabled` to `true` when using [stable/hadoop](../hadoop)).
+Make sure that your Hadoop installation has WebHDFS enabled (by setting `hdfs.webhdfs.enabled` to `true` when using [stable/hadoop]([../hadoop](https://github.com/helm/charts/tree/master/stable/hadoop))).
 
 To install the chart with the release name `knox`:
 
