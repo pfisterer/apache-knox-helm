@@ -1,3 +1,3 @@
 # Helm repo for Apache Knox
 
-Documentation available here: <https://pfisterer.github.io/apache-knox-helm/>
+Documentation available here: <https://github.com/pfisterer/apache-knox-helm>
