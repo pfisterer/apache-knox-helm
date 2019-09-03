@@ -6,16 +6,23 @@
 
 Make sure that your Hadoop installation has WebHDFS enabled (by setting `hdfs.webhdfs.enabled` to `true` when using [stable/hadoop]([../hadoop](https://github.com/helm/charts/tree/master/stable/hadoop))).
 
+Add repository to helm
+
+```bash
+helm repo add pfisterer-knox https://pfisterer.github.io/apache-knox-helm/
+helm repo update
+```
+
 To install the chart with the release name `knox`:
 
 ```
-$ helm install --name knox pfisterer/apache-knox-helm
+$ helm install --name knox pfisterer-knox/apache-knox-helm
 ```
 
 For correctly proxying to your HDFS instance, set `knox.hadoop.nameNodeUrl`, `knox.hadoop.resourceManagerUrl`, and `knox.hadoop.webHdfsUrl`. Example: 
 
 ```
-$ helm install --name knox pfisterer/apache-knox-helm \
+$ helm install --name knox pfisterer-knox/apache-knox-helm \
 		--set "knox.hadoop.nameNodeUrl=hdfs://your-namenode-svc:9000/"  \
 		--set "knox.hadoop.resourceManagerUrl=http://your-resource-mgr-svc:8088/ws" \
 		--set "knox.hadoop.webHdfsUrl=http://your-namenode-svc:50070/webhdfs"
@@ -42,11 +49,6 @@ The following table lists the configurable parameters of the Apache Knox chart a
 | `knox.gateway.logLevel`          | Log4j log level for the gateway component | `DEBUG`                                                                           |
 | `knox.ldap.logLevel`             | Log4j log level for the LDAP server       | `INFO`                                                                            |
 
-## Helm repository
-
-Available here: <https://pfisterer.github.io/apache-knox-helm/>
-
-
 ## Related Charts
 
 - The [Hadoop Chart](https://github.com/helm/charts/tree/master/stable/hadoop)
@@ -71,3 +73,4 @@ git add docs/
 git commit -a -m "Updated helm repository"
 git push origin master
 ```
+
