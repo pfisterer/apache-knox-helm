@@ -1,13 +1,13 @@
-name: knox
+name: apache-knox-helm
 description: Apache Knox
 version: 0.1.0
 appVersion: 1.3.0
 keywords:
   - Apache Hadoop
   - Apache Knox
-home: https://github.com/pfisterer/apache-knox-docker
+home: https://github.com/pfisterer/apache-knox-helm
 sources:
-  - https://hub.docker.com/r/farberg/apache-knox-docker
+  - https://hub.docker.com/r/farberg/apache-knox-helm
 maintainers:
   - name: pfisterer
     url: http://github.com/pfisterer

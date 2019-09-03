@@ -50,3 +50,17 @@ The following table lists the configurable parameters of the Apache Knox chart a
 ## Related Charts
 
 - The [Hadoop Chart](https://github.com/helm/charts/tree/master/stable/hadoop)
+
+## Development
+
+# Upload a new version of the chart
+
+```bash
+helm lint
+helm package .
+mv apache-knox-helm-*.tgz docs/
+helm repo index docs/ --url https://pfisterer.github.io/apache-knox-helm/
+git add docs/
+git commit -a -m "Updated helm repository"
+git push origin master
+```
