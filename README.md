@@ -53,7 +53,7 @@ The following table lists the configurable parameters of the Apache Knox chart a
 
 ## Development
 
-# Upload a new version of the chart
+### Upload a new version of the chart
 
 ```bash
 helm lint
