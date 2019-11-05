@@ -28,6 +28,8 @@ $ helm install --name knox pfisterer-knox/apache-knox-helm \
 		--set "knox.hadoop.webHdfsUrl=http://your-namenode-svc:50070/webhdfs"
 ```
 
+Afterwards, you should be able to access YARN-UI (`/yarn`), WEBHDFS (`/webhdfs`), and WEBHDFS UI (`/hdfs`).
+
 ## Configuration
 
 The following table lists the configurable parameters of the Apache Knox chart and their default values.
