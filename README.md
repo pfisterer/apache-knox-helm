@@ -37,7 +37,7 @@ The following table lists the configurable parameters of the Apache Knox chart a
 | `knox.image.repository`          | Docker image for Apache Knox              | [farberg/apache-knox-docker](https://hub.docker.com/r/farberg/apache-knox-docker) |
 | `knox.image.tag`                 | Docker image tag                          | `1.3.0`                                                                           |
 | `knox.image.pullPolicy`          | Pull policy for the images                | `IfNotPresent`                                                                    |
-| `knox.servicetype`               | Type of service exposure for Apache Knox  | `LoadBalancer`                                                                    |
+| `knox.servicetype`               | Type of service exposure for Apache Knox  | `ClusterIP`                                                                       |
 | `knox.hadoop.nameNodeUrl`        | URL to Hadoop's name node                 | `hdfs://nn:9000/webhdfs`                                                          |
 | `knox.hadoop.resourceManagerUrl` | URL to Hadoop's Resource Manager          | `http://rm:8088/ws`                                                               |
 | `knox.hadoop.webHdfsUrl`         | URL to Hadoop's webhdfs                   | `http://nn:50070/webhdfs`                                                         |
@@ -48,6 +48,12 @@ The following table lists the configurable parameters of the Apache Knox chart a
 | `knox.users.tom.pw`              | Password for user `tom`                   | `tom-password`                                                                    |
 | `knox.gateway.logLevel`          | Log4j log level for the gateway component | `DEBUG`                                                                           |
 | `knox.ldap.logLevel`             | Log4j log level for the LDAP server       | `INFO`                                                                            |
+| `ingress.enabled`                | If true, Ingress will be created          | `false`                                                                           |
+| `ingress.annotations`            | Ingress annotations                       | `{}`                                                                              |
+| `ingress.labels`                 | Ingress labels                            | `{}`                                                                              |
+| `ingress.path`                   | Ingress service path                      | `/`                                                                               |
+| `ingress.hosts`                  | Ingress hostnames                         | `[]`                                                                              |
+| `ingress.tls`                    | Ingress TLS configuration (YAML)          | `[]`                                                                              |
 
 ## Related Charts
 

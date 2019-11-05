@@ -1,6 +1,6 @@
 name: apache-knox-helm
 description: Apache Knox
-version: 0.1.0
+version: 0.1.1
 appVersion: 1.3.0
 icon: https://knox.apache.org/images/knox-logo.gif
 keywords:
