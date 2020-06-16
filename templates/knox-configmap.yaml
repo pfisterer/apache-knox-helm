@@ -8,6 +8,28 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 data:
+  # Not used yet in knox-dep.yaml
+  shared-providers-default-providers.json: |
+    {
+        "providers": [
+            {
+                "role": "authentication",
+                "name": "ShiroProvider",
+                "enabled": "true",
+                "params": {
+                    "sessionTimeout": "20",
+                    "main.ldapRealm": "org.apache.knox.gateway.shirorealm.KnoxLdapRealm",
+                    "main.ldapContextFactory": "org.apache.knox.gateway.shirorealm.KnoxLdapContextFactory",
+                    "main.ldapRealm.contextFactory": "$ldapContextFactory",
+                    "main.ldapRealm.userDnTemplate": "uid={0},ou=people,dc=hadoop,dc=apache,dc=org",
+                    "main.ldapRealm.contextFactory.url": "ldap://localhost:33389",
+                    "main.ldapRealm.contextFactory.authenticationMechanism": "simple",
+                    "urls./**": "authcBasic"
+                }
+            }
+        ]
+    }
+
   topologies-sandbox.xml: |
     <?xml version="1.0" encoding="utf-8"?>
     <topology>
@@ -116,25 +138,223 @@ data:
              <url>{{ .Values.knox.hadoop.yarnUIUrl }}</url> <!-- e.g. http://sandbox.hortonworks.com:8088 -->
         </service>
 
+        <!-- New in 1.1.4
+        <service>
+            <role>WEBHCAT</role>
+            <url>http://localhost:50111/templeton</url>
+        </service>
+
+        <service>
+            <role>OOZIE</role>
+            <url>http://localhost:11000/oozie</url>
+            <param>
+                <name>replayBufferSize</name>
+                <value>8</value>
+            </param>
+        </service>
+
+        <service>
+            <role>WEBHBASE</role>
+            <url>http://localhost:60080</url>
+            <param>
+                <name>replayBufferSize</name>
+                <value>8</value>
+            </param>
+        </service>
+
+        <service>
+            <role>HIVE</role>
+            <url>http://localhost:10001/cliservice</url>
+            <param>
+                <name>replayBufferSize</name>
+                <value>8</value>
+            </param>
+        </service>
+
+        <service>
+            <role>DRUID-COORDINATOR-UI</role>
+            <url>http://localhost:8081</url>
+        </service>
+
+        <service>
+            <role>DRUID-COORDINATOR</role>
+            <url>http://localhost:8081</url>
+        </service>
+
+        <service>
+            <role>DRUID-BROKER</role>
+            <url>http://localhost:8082</url>
+        </service>
+
+        <service>
+            <role>DRUID-ROUTER</role>
+            <url>http://localhost:8082</url>
+        </service>
+        
+        <service>
+            <role>DRUID-OVERLORD</role>
+            <url>http://localhost:8090</url>
+        </service>
+
+        <service>
+            <role>DRUID-OVERLORD-UI</role>
+            <url>http://localhost:8090</url>
+        </service>
+
+        <service>
+            <role>HUE</role>
+            <url>http://localhost:8889</url>
+        </service>
+    -->
+    </topology>
+
+  topologies-homepage.xml: |
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!--
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+    -->
+    <topology>
+        <name>homepage</name>
+        <gateway>
+            <provider>
+                <role>webappsec</role>
+                <name>WebAppSec</name>
+                <enabled>true</enabled>
+                <param>
+                    <name>csrf.enabled</name>
+                    <value>true</value>
+                </param>
+                <param>
+                    <name>csrf.customHeader</name>
+                    <value>X-XSRF-Header</value>
+                </param>
+                <param>
+                    <name>csrf.methodsToIgnore</name>
+                    <value>GET,OPTIONS,HEAD</value>
+                </param>
+                <param>
+                    <name>xframe.options.enabled</name>
+                    <value>true</value>
+                </param>
+                <param>
+                    <name>xss.protection.enabled</name>
+                    <value>true</value>
+                </param>
+                <param>
+                    <name>strict.transport.enabled</name>
+                    <value>false</value>
+                </param>
+            </provider>
+            <provider>
+                <role>federation</role>
+                <name>SSOCookieProvider</name>
+                <enabled>true</enabled>
+            </provider>
+        </gateway>
+        <service>
+            <role>KNOX-METADATA</role>
+        </service>
+        <application>
+            <name>home</name>
+        </application>
+    </topology>
+
+  topologies-metadata.xml: |
+    <?xml version="1.0" encoding="utf-8"?>
+    <!--
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+    -->
+    <topology>
+
+        <gateway>
+            <provider>
+                <role>authentication</role>
+                <name>ShiroProvider</name>
+                <enabled>true</enabled>
+                <param>
+                    <name>sessionTimeout</name>
+                    <value>30</value>
+                </param>
+                <param>
+                    <name>main.ldapRealm</name>
+                    <value>org.apache.knox.gateway.shirorealm.KnoxLdapRealm</value>
+                </param>
+                <param>
+                    <name>main.ldapContextFactory</name>
+                    <value>org.apache.knox.gateway.shirorealm.KnoxLdapContextFactory</value>
+                </param>
+                <param>
+                    <name>main.ldapRealm.contextFactory</name>
+                    <value>$ldapContextFactory</value>
+                </param>
+                <param>
+                    <name>main.ldapRealm.userDnTemplate</name>
+                    <value>uid={0},ou=people,dc=hadoop,dc=apache,dc=org</value>
+                </param>
+                <param>
+                    <name>main.ldapRealm.contextFactory.url</name>
+                    <value>ldap://localhost:33389</value>
+                </param>
+                <param>
+                    <name>main.ldapRealm.contextFactory.authenticationMechanism</name>
+                    <value>simple</value>
+                </param>
+                <param>
+                    <name>urls./**</name>
+                    <value>authcBasic</value>
+                </param>
+            </provider>
+        </gateway>
+
+        <service>
+            <role>KNOX-METADATA</role>
+        </service>
+
     </topology>
 
   topologies-admin.xml: |
     <?xml version="1.0" encoding="utf-8"?>
     <!--
-      Licensed to the Apache Software Foundation (ASF) under one or more
-      contributor license agreements.  See the NOTICE file distributed with
-      this work for additional information regarding copyright ownership.
-      The ASF licenses this file to You under the Apache License, Version 2.0
-      (the "License"); you may not use this file except in compliance with
-      the License.  You may obtain a copy of the License at
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
 
-          http://www.apache.org/licenses/LICENSE-2.0
+        http://www.apache.org/licenses/LICENSE-2.0
 
-      Unless required by applicable law or agreed to in writing, software
-      distributed under the License is distributed on an "AS IS" BASIS,
-      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-      See the License for the specific language governing permissions and
-      limitations under the License.
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
     -->
     <topology>
 
@@ -220,29 +440,29 @@ data:
   topologies-knoxsso.xml: |
     <?xml version="1.0" encoding="utf-8"?>
     <!--
-      Licensed to the Apache Software Foundation (ASF) under one or more
-      contributor license agreements.  See the NOTICE file distributed with
-      this work for additional information regarding copyright ownership.
-      The ASF licenses this file to You under the Apache License, Version 2.0
-      (the "License"); you may not use this file except in compliance with
-      the License.  You may obtain a copy of the License at
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
 
-          http://www.apache.org/licenses/LICENSE-2.0
+        http://www.apache.org/licenses/LICENSE-2.0
 
-      Unless required by applicable law or agreed to in writing, software
-      distributed under the License is distributed on an "AS IS" BASIS,
-      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-      See the License for the specific language governing permissions and
-      limitations under the License.
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
     -->
     <topology>
         <gateway>
-          <provider>
+        <provider>
             <role>webappsec</role>
             <name>WebAppSec</name>
             <enabled>true</enabled>
             <param><name>xframe.options.enabled</name><value>true</value></param>
-          </provider>
+        </provider>
 
             <provider>
                 <role>authentication</role>
@@ -259,7 +479,7 @@ data:
                 </param>
                 <param>
                     <name>redirectToUrl</name>
-                    <value>/gateway/knoxsso/knoxauth/login.html</value>
+                    <value>/${GATEWAY_PATH}/knoxsso/knoxauth/login.html</value>
                 </param>
                 <param>
                     <name>restrictedCookies</name>
@@ -318,7 +538,7 @@ data:
         </gateway>
 
         <application>
-          <name>knoxauth</name>
+        <name>knoxauth</name>
         </application>
 
         <service>
@@ -328,39 +548,41 @@ data:
                 <value>true</value>
             </param>
             <param>
+                <!-- 24 hours in milliseconds = 86400000 -->
                 <name>knoxsso.token.ttl</name>
-                <value>-1</value>
+                <value>86400000</value>
             </param>
-            <param>
+            <!-- 1.1.3
+              <param>
               <name>knoxsso.redirect.whitelist.regex</name>
               <value>^https?:\/\/(localhost|127\.0\.0\.1|0:0:0:0:0:0:0:1|::1):[0-9].*$</value>
             </param>
+            -->
         </service>
 
-    </topology>
+    </topology>  
 
   topologies-manager.xml: |
-    <?xml version="1.0" encoding="utf-8"?>
+    <?xml version="1.0" encoding="UTF-8"?>
     <!--
-      Licensed to the Apache Software Foundation (ASF) under one or more
-      contributor license agreements.  See the NOTICE file distributed with
-      this work for additional information regarding copyright ownership.
-      The ASF licenses this file to You under the Apache License, Version 2.0
-      (the "License"); you may not use this file except in compliance with
-      the License.  You may obtain a copy of the License at
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
 
-          http://www.apache.org/licenses/LICENSE-2.0
+        http://www.apache.org/licenses/LICENSE-2.0
 
-      Unless required by applicable law or agreed to in writing, software
-      distributed under the License is distributed on an "AS IS" BASIS,
-      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-      See the License for the specific language governing permissions and
-      limitations under the License.
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
     -->
     <topology>
-
+        <name>manager</name>
         <gateway>
-
             <provider>
                 <role>webappsec</role>
                 <name>WebAppSec</name>
@@ -369,19 +591,24 @@ data:
                 <param><name>csrf.customHeader</name><value>X-XSRF-Header</value></param>
                 <param><name>csrf.methodsToIgnore</name><value>GET,OPTIONS,HEAD</value></param>
                 <param><name>xframe.options.enabled</name><value>true</value></param>
-                <param><name>strict.transport.enabled</name><value>true</value></param>
+                <param><name>xss.protection.enabled</name><value>true</value></param>
+                <param><name>strict.transport.enabled</name><value>false</value></param>
             </provider>
+            
+            <!-- 1.1.4
+            <provider>
+                <role>federation</role>
+                <name>SSOCookieProvider</name>
+                <enabled>true</enabled>
+            </provider>
+            --->
 
+            <!-- 1.1.3 (replaced by shared-providers/default-providers.json?)
             <provider>
                 <role>authentication</role>
                 <name>ShiroProvider</name>
                 <enabled>true</enabled>
                 <param>
-                    <!-- 
-                    session timeout in minutes,  this is really idle timeout,
-                    defaults to 30mins, if the property value is not defined,, 
-                    current client authentication would expire if client idles contiuosly for more than this value
-                    -->
                     <name>sessionTimeout</name>
                     <value>30</value>
                 </param>
@@ -414,11 +641,17 @@ data:
                     <value>authcBasic</value>
                 </param>
             </provider>
+            -->  
 
             <provider>
                 <role>authorization</role>
                 <name>AclsAuthz</name>
                 <enabled>true</enabled>
+                <param>
+                    <name>knox.acl.mode</name>
+                    <value>OR</value>
+                </param>
+
                 <param>
                     <name>knox.acl</name>
                     <value>admin;*;*</value>
@@ -431,7 +664,19 @@ data:
                 <enabled>true</enabled>
             </provider>
 
-            <provider>
+           <!-- 1.1.4 <provider>
+                <role>identity-assertion</role>
+                <name>HadoopGroupProvider</name>
+                <enabled>true</enabled>
+                <param>
+                    <name>CENTRAL_GROUP_CONFIG_PREFIX</name>
+                    <value>gateway.group.config.</value>
+                </param>
+            </provider>
+            --->
+
+        <!-- 1.1.3 only --->
+          <provider>
                 <role>hostmap</role>
                 <name>static</name>
                 <enabled>true</enabled>
@@ -440,19 +685,18 @@ data:
                     <value>sandbox,sandbox.hortonworks.com</value>
                 </param>
             </provider>
-
+        
         </gateway>
-
-        <application>
-            <role>admin-ui</role>
-        </application>
-
+        
         <service>
             <role>KNOX</role>
         </service>
 
-    </topology>
+        <application>
+            <name>admin-ui</name>
+        </application>
 
+    </topology>
 
   gateway-log4j.properties: |
     # Licensed to the Apache Software Foundation (ASF) under one
@@ -477,7 +721,7 @@ data:
 
     log4j.rootLogger=INFO, drfa
 
-    log4j.logger.org.apache.knox.gateway={{ .Values.knox.gateway.logLevel }}
+     log4j.logger.org.apache.knox.gateway={{ .Values.knox.gateway.logLevel }}
 
     #log4j.logger.org.eclipse.jetty=DEBUG
     #log4j.logger.org.apache.shiro=DEBUG
@@ -538,7 +782,6 @@ data:
     #log4j.logger.org.springframework=DEBUG
     #log4j.logger.net.sf.ehcache=DEBUG
     #log4j.logger.org.apache.shiro.util.ThreadContext=DEBUG
-
 
   gateway-site.xml: |
     <?xml version="1.0" encoding="UTF-8"?>
@@ -638,6 +881,68 @@ data:
             <description>The interval (in seconds) for polling Ambari for cluster configuration changes.</description>
         </property>
 
+        <!-- Knox Admin related config (new in 1.1.4) -->
+        <property>
+            <name>gateway.knox.admin.groups</name>
+            <value>admin</value>
+        </property>
+
+        <!-- DEMO LDAP config for Hadoop Group Provider -->
+        <property>
+            <name>gateway.group.config.hadoop.security.group.mapping</name>
+            <value>org.apache.hadoop.security.LdapGroupsMapping</value>
+        </property>
+        <property>
+            <name>gateway.group.config.hadoop.security.group.mapping.ldap.bind.user</name>
+            <value>uid=guest,ou=people,dc=hadoop,dc=apache,dc=org</value>
+        </property>
+        <property>
+            <name>gateway.group.config.hadoop.security.group.mapping.ldap.bind.password</name>
+            <value>guest-password</value>
+        </property>
+        <property>
+            <name>gateway.group.config.hadoop.security.group.mapping.ldap.url</name>
+            <value>ldap://localhost:33389</value>
+        </property>
+        <property>
+            <name>gateway.group.config.hadoop.security.group.mapping.ldap.base</name>
+            <value></value>
+        </property>
+        <property>
+            <name>gateway.group.config.hadoop.security.group.mapping.ldap.search.filter.user</name>
+            <value>(&amp;(|(objectclass=person)(objectclass=applicationProcess))(cn={0}))</value>
+        </property>
+        <property>
+            <name>gateway.group.config.hadoop.security.group.mapping.ldap.search.filter.group</name>
+            <value>(objectclass=groupOfNames)</value>
+        </property>
+        <property>
+            <name>hgateway.group.config.adoop.security.group.mapping.ldap.search.attr.member</name>
+            <value>member</value>
+        </property>
+        <property>
+            <name>gateway.group.config.hadoop.security.group.mapping.ldap.search.attr.group.name</name>
+            <value>cn</value>
+        </property>
+        <property>
+            <name>gateway.dispatch.whitelist.services</name>
+            <value>DATANODE,HBASEUI,HDFSUI,JOBHISTORYUI,NODEUI,YARNUI,knoxauth</value>
+            <description>The comma-delimited list of service roles for which the gateway.dispatch.whitelist should be applied.</description>
+        </property>
+        <property>
+            <name>gateway.dispatch.whitelist</name>
+            <value>^https?:\/\/(localhost|127\.0\.0\.1|0:0:0:0:0:0:0:1|::1):[0-9].*$</value>
+            <description>The whitelist to be applied for dispatches associated with the service roles specified by gateway.dispatch.whitelist.services.
+            If the value is DEFAULT, a domain-based whitelist will be derived from the Knox host.</description>
+        </property>
+        <property>
+            <name>gateway.xforwarded.header.context.append.servicename</name>
+            <value>LIVYSERVER</value>
+            <description>Add service name to x-forward-context header for the list of services defined above.</description>
+        </property>
+       <!-- END: Knox Admin related config (new in 1.1.4) -->
+
+
     </configuration>
 
   knoxcli-log4j.properties: |
@@ -674,7 +979,7 @@ data:
     log4j.appender.drfa.DatePattern=.yyyy-MM-dd
     log4j.appender.drfa.layout=org.apache.log4j.PatternLayout
     log4j.appender.drfa.layout.ConversionPattern=%d{ISO8601} %-5p %c{2} (%F:%M(%L)) - %m%n
-
+    
   ldap-log4j.properties: |
     # Licensed to the Apache Software Foundation (ASF) under one
     # or more contributor license agreements.  See the NOTICE file
@@ -707,7 +1012,7 @@ data:
     log4j.appender.drfa.File=${app.log.dir}/${app.log.file}
     log4j.appender.drfa.DatePattern=.yyyy-MM-dd
     log4j.appender.drfa.layout=org.apache.log4j.PatternLayout
-    log4j.appender.drfa.layout.ConversionPattern=%d{ISO8601} %-5p %c{2} (%F:%M(%L)) - %m%n
+    log4j.appender.drfa.layout.ConversionPattern=%d{ISO8601} %-5p %c{2} (%F:%M(%L)) - %m%n    
 
   shell-log4j.properties: |
     # Licensed to the Apache Software Foundation (ASF) under one
@@ -742,7 +1047,6 @@ data:
     log4j.appender.drfa.DatePattern=.yyyy-MM-dd
     log4j.appender.drfa.layout=org.apache.log4j.PatternLayout
     log4j.appender.drfa.layout.ConversionPattern=%d{ISO8601} %-5p %c{2} (%F:%M(%L)) - %m%n
-
 
   users.ldif: |
     # Licensed to the Apache Software Foundation (ASF) under one
@@ -838,7 +1142,6 @@ data:
     member: uid=sam,ou=people,dc=hadoop,dc=apache,dc=org
     member: uid=tom,ou=people,dc=hadoop,dc=apache,dc=org
 
-
     # create the scientist group under groups
     dn: cn=scientist,ou=groups,dc=hadoop,dc=apache,dc=org
     objectclass:top
@@ -846,3 +1149,6 @@ data:
     cn: scientist
     description: scientist group
     member: uid=sam,ou=people,dc=hadoop,dc=apache,dc=org
+
+  descriptors-README: |
+    THIS DIRECTORY IS WHERE SIMPLE TOPOLOGY DESCRIPTORS CAN BE PLACED

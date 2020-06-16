@@ -55,6 +55,8 @@ spec:
         configMap:
           name: {{ template "knox.fullname" . }}-confmap
           items:
+          # - key: shared-providers-default-providers.json
+          #   path: shared-providers/default-providers.json
           - key: topologies-admin.xml
             path: topologies/admin.xml
           - key: topologies-knoxsso.xml
@@ -63,6 +65,10 @@ spec:
             path: topologies/manager.xml
           - key: topologies-sandbox.xml
             path: topologies/sandbox.xml
+          - key: topologies-homepage.xml
+            path: topologies/homepage.xml
+          - key: topologies-metadata.xml
+            path: topologies/metadata.xml
           - key: gateway-log4j.properties
             path: gateway-log4j.properties
           - key: gateway-site.xml
@@ -75,3 +81,5 @@ spec:
             path: shell-log4j.properties
           - key: users.ldif
             path: users.ldif
+          - key:  descriptors-README
+            path:  descriptors/README
