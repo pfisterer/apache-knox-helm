@@ -552,12 +552,11 @@ data:
                 <name>knoxsso.token.ttl</name>
                 <value>86400000</value>
             </param>
-            <!-- 1.1.3
-              <param>
+            <param>
               <name>knoxsso.redirect.whitelist.regex</name>
-              <value>^https?:\/\/(localhost|127\.0\.0\.1|0:0:0:0:0:0:0:1|::1):[0-9].*$</value>
+              <value>.*</value>
+              <!-- <value>^https?:\/\/(localhost|127\.0\.0\.1|0:0:0:0:0:0:0:1|::1):[0-9].*$</value> -->
             </param>
-            -->
         </service>
 
     </topology>  
@@ -595,15 +594,7 @@ data:
                 <param><name>strict.transport.enabled</name><value>false</value></param>
             </provider>
             
-            <!-- 1.1.4
-            <provider>
-                <role>federation</role>
-                <name>SSOCookieProvider</name>
-                <enabled>true</enabled>
-            </provider>
-            --->
-
-            <!-- 1.1.3 (replaced by shared-providers/default-providers.json?)
+         
             <provider>
                 <role>authentication</role>
                 <name>ShiroProvider</name>
@@ -641,7 +632,6 @@ data:
                     <value>authcBasic</value>
                 </param>
             </provider>
-            -->  
 
             <provider>
                 <role>authorization</role>
@@ -664,18 +654,7 @@ data:
                 <enabled>true</enabled>
             </provider>
 
-           <!-- 1.1.4 <provider>
-                <role>identity-assertion</role>
-                <name>HadoopGroupProvider</name>
-                <enabled>true</enabled>
-                <param>
-                    <name>CENTRAL_GROUP_CONFIG_PREFIX</name>
-                    <value>gateway.group.config.</value>
-                </param>
-            </provider>
-            --->
-
-        <!-- 1.1.3 only --->
+        <!-- 1.1.3 only -->
           <provider>
                 <role>hostmap</role>
                 <name>static</name>
@@ -931,7 +910,8 @@ data:
         </property>
         <property>
             <name>gateway.dispatch.whitelist</name>
-            <value>^https?:\/\/(localhost|127\.0\.0\.1|0:0:0:0:0:0:0:1|::1):[0-9].*$</value>
+            <!-- <value>^https?:\/\/(localhost|127\.0\.0\.1|0:0:0:0:0:0:0:1|::1):[0-9].*$</value> -->
+            <value>.*</value>
             <description>The whitelist to be applied for dispatches associated with the service roles specified by gateway.dispatch.whitelist.services.
             If the value is DEFAULT, a domain-based whitelist will be derived from the Knox host.</description>
         </property>
