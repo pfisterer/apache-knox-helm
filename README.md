@@ -37,7 +37,7 @@ The following table lists the configurable parameters of the Apache Knox chart a
 | Parameter                        | Description                               | Default                                                                           |
 | -------------------------------- | ----------------------------------------- | --------------------------------------------------------------------------------- |
 | `knox.image.repository`          | Docker image for Apache Knox              | [farberg/apache-knox-docker](https://hub.docker.com/r/farberg/apache-knox-docker) |
-| `knox.image.tag`                 | Docker image tag                          | `1.3.0`                                                                           |
+| `knox.image.tag`                 | Docker image tag                          | `1.4.0`                                                                           |
 | `knox.image.pullPolicy`          | Pull policy for the images                | `IfNotPresent`                                                                    |
 | `knox.servicetype`               | Type of service exposure for Apache Knox  | `ClusterIP`                                                                       |
 | `knox.hadoop.nameNodeUrl`        | URL to Hadoop's name node                 | `hdfs://nn:9000/webhdfs`                                                          |
