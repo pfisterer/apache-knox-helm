@@ -1,6 +1,8 @@
 # Apache Knox Chart
 
-[Apache Knox](https://knox.apache.org/) is an Application Gateway for interacting with the REST APIs and UIs of Apache Hadoop deployments. This chart is primarily intended to access HDFS from outside a Kubernetes cluster using simple REST APIs.
+[Apache Knox](https://knox.apache.org/) is an Application Gateway for interacting with the REST APIs and UIs of Apache Hadoop deployments. This chart is primarily intended to access HDFS from outside a Kubernetes cluster using simple REST APIs. 
+
+This chart uses uses docker image [pfisterer/apache-knox-docker](https://github.com/pfisterer/apache-knox-docker). 
 
 ## Installing the Chart (requires an existing Hadoop deployment)
 
