@@ -2,8 +2,27 @@ apiVersion: v1
 entries:
   apache-knox-helm:
   - apiVersion: v1
+    appVersion: 1.5.0
+    created: "2021-01-20T10:20:19.635474+01:00"
+    description: Apache Knox
+    digest: 5393fc51be95b7fae0d027b0638f3cb194243949ffd144d6c256c38cb616869b
+    home: https://github.com/pfisterer/apache-knox-helm
+    icon: https://knox.apache.org/images/knox-logo.gif
+    keywords:
+    - Apache Hadoop
+    - Apache Knox
+    maintainers:
+    - name: pfisterer
+      url: http://github.com/pfisterer
+    name: apache-knox-helm
+    sources:
+    - https://hub.docker.com/r/farberg/apache-knox-helm
+    urls:
+    - https://pfisterer.github.io/apache-knox-helm/apache-knox-helm-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v1
     appVersion: 1.4.0
-    created: "2020-06-16T10:14:24.905542+02:00"
+    created: "2021-01-20T10:20:19.633973+01:00"
     description: Apache Knox
     digest: fbe7134431cac5a94c93b778ed743bc7ba3c7fd9010cc6bdd759df919eb47c3f
     home: https://github.com/pfisterer/apache-knox-helm
@@ -22,7 +41,7 @@ entries:
     version: 0.1.6
   - apiVersion: v1
     appVersion: 1.4.0
-    created: "2020-06-16T10:14:24.904091+02:00"
+    created: "2021-01-20T10:20:19.63242+01:00"
     description: Apache Knox
     digest: 60099402d7378c92e98e16fd4fe65e4295abb6c36b1d73013dd11895c40a28d2
     home: https://github.com/pfisterer/apache-knox-helm
@@ -41,7 +60,7 @@ entries:
     version: 0.1.5
   - apiVersion: v1
     appVersion: 1.3.0
-    created: "2020-06-16T10:14:24.893471+02:00"
+    created: "2021-01-20T10:20:19.623682+01:00"
     description: Apache Knox
     digest: 41497d20fefc8f4cbbfd9aab970855a6c411fb93eca4edccf5cc98d34204ce39
     home: https://github.com/pfisterer/apache-knox-helm
@@ -60,7 +79,7 @@ entries:
     version: 0.1.4
   - apiVersion: v1
     appVersion: 1.3.0
-    created: "2020-06-16T10:14:24.886511+02:00"
+    created: "2021-01-20T10:20:19.618808+01:00"
     description: Apache Knox
     digest: c33cae7360f33e84d4e15bbab4cdd30df7d5f3ef54e630837326eb2e04743cbd
     home: https://github.com/pfisterer/apache-knox-helm
@@ -79,7 +98,7 @@ entries:
     version: 0.1.3
   - apiVersion: v1
     appVersion: 1.3.0
-    created: "2020-06-16T10:14:24.881079+02:00"
+    created: "2021-01-20T10:20:19.614292+01:00"
     description: Apache Knox
     digest: 9b94dfefd93fccdca3b2b6a3afc0868711346f0444089719420416adc8d34fdd
     home: https://github.com/pfisterer/apache-knox-helm
@@ -98,7 +117,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: 1.3.0
-    created: "2020-06-16T10:14:24.877578+02:00"
+    created: "2021-01-20T10:20:19.610803+01:00"
     description: Apache Knox
     digest: 8abaac24a47e7cd34bac708865a3e369d5c0a5ac32869b30944039918373098e
     home: https://github.com/pfisterer/apache-knox-helm
@@ -117,7 +136,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: 1.3.0
-    created: "2020-06-16T10:14:24.875076+02:00"
+    created: "2021-01-20T10:20:19.608211+01:00"
     description: Apache Knox
     digest: 13b81018f5d86f9fd01a1c8a41f2c6dd936d6e034f429e74ed1db97859135409
     home: https://github.com/pfisterer/apache-knox-helm
@@ -133,4 +152,4 @@ entries:
     urls:
     - https://pfisterer.github.io/apache-knox-helm/apache-knox-helm-0.1.0.tgz
     version: 0.1.0
-generated: "2020-06-16T10:14:24.869864+02:00"
+generated: "2021-01-20T10:20:19.606505+01:00"
