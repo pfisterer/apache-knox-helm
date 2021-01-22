@@ -88,6 +88,9 @@ git push origin master
 ## Changes
 
 Version 0.1.8
+- Grant access to any user (root, admin, sam, tom)
+
+Version 0.1.8
 - Add user `root` and option to change its password
 
 Version 0.1.7

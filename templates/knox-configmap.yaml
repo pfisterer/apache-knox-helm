@@ -409,7 +409,7 @@ data:
                 <enabled>true</enabled>
                 <param>
                     <name>knox.acl</name>
-                    <value>admin;*;*</value>
+                    <value>*;*;*</value>
                 </param>
             </provider>
 
