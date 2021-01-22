@@ -48,6 +48,7 @@ The following table lists the configurable parameters of the Apache Knox chart a
 | `knox.hadoop.hdfsUIUrl`          | URL to Hadoop's hdfs web UI               | `http://nn:50070/`                                                                |
 | `knox.hadoop.yarnUIUrl`          | URL to YARN's web UI                      | `http://yarn-ui:8088/`                                                            |
 | `knox.users.admin.pw`            | Password for user `admin`                 | `admin-password`                                                                  |
+| `knox.users.root.pw`             | Password for user `root`                  | `root-password`                                                                   |
 | `knox.users.sam.pw`              | Password for user `sam`                   | `sam-password`                                                                    |
 | `knox.users.tom.pw`              | Password for user `tom`                   | `tom-password`                                                                    |
 | `knox.gateway.logLevel`          | Log4j log level for the gateway component | `DEBUG`                                                                           |
@@ -84,3 +85,10 @@ git commit -a -m "Updated helm repository"
 git push origin master
 ```
 
+## Changes
+
+Version 0.1.8
+- Add user `root` and option to change its password
+
+Version 0.1.7
+- Update to Apache Knox 1.5.0

@@ -23,6 +23,8 @@ knox:
   users:
     admin:
       pw: "admin-password"
+    root:
+      pw: "root-password"
     sam:
       pw: "sam-password"
     tom:

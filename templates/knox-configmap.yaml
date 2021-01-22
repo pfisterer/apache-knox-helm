@@ -1084,6 +1084,17 @@ data:
     uid: admin
     userPassword:{{ .Values.knox.users.admin.pw }}
 
+    # entry for sample user root
+    dn: uid=root,ou=people,dc=hadoop,dc=apache,dc=org
+    objectclass:top
+    objectclass:person
+    objectclass:organizationalPerson
+    objectclass:inetOrgPerson
+    cn: Root
+    sn: Root
+    uid: root
+    userPassword:{{ .Values.knox.users.root.pw }}
+
     # entry for sample user sam
     dn: uid=sam,ou=people,dc=hadoop,dc=apache,dc=org
     objectclass:top
