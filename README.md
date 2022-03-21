@@ -87,7 +87,10 @@ git push origin master
 
 ## Changes
 
-Version 0.1.8
+Version 0.1.10
+- Update to Apache Knox 1.6.1
+
+Version 0.1.9
 - Grant access to any user (root, admin, sam, tom)
 
 Version 0.1.8
