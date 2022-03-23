@@ -44,8 +44,8 @@ The following table lists the configurable parameters of the Apache Knox chart a
 | `knox.servicetype`               | Type of service exposure for Apache Knox  | `ClusterIP`                                                                       |
 | `knox.hadoop.nameNodeUrl`        | URL to Hadoop's name node                 | `hdfs://nn:9000/webhdfs`                                                          |
 | `knox.hadoop.resourceManagerUrl` | URL to Hadoop's Resource Manager          | `http://rm:8088/ws`                                                               |
-| `knox.hadoop.webHdfsUrl`         | URL to Hadoop's webhdfs                   | `http://nn:50070/webhdfs`                                                         |
-| `knox.hadoop.hdfsUIUrl`          | URL to Hadoop's hdfs web UI               | `http://nn:50070/`                                                                |
+| `knox.hadoop.webHdfsUrl`         | URL to Hadoop's webhdfs                   | `http://nn:9870/webhdfs`                                                          |
+| `knox.hadoop.hdfsUIUrl`          | URL to Hadoop's hdfs web UI               | `http://nn:9870/`                                                                 |
 | `knox.hadoop.yarnUIUrl`          | URL to YARN's web UI                      | `http://yarn-ui:8088/`                                                            |
 | `knox.users.admin.pw`            | Password for user `admin`                 | `admin-password`                                                                  |
 | `knox.users.root.pw`             | Password for user `root`                  | `root-password`                                                                   |

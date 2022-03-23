@@ -107,12 +107,12 @@ data:
         
         <service>
             <role>WEBHDFS</role>
-            <url>{{ .Values.knox.hadoop.webHdfsUrl }}</url> <!-- e.g. http://hadoop-demo-name-node:50070/webhdfs -->
+            <url>{{ .Values.knox.hadoop.webHdfsUrl }}</url> <!-- e.g. http://hadoop-demo-name-node:9870/webhdfs -->
         </service>
 
         <service>
             <role>HDFSUI</role>
-            <url>{{ .Values.knox.hadoop.hdfsUIUrl }}</url> <!-- e.g. http://sandbox.hortonworks.com:50070 -->
+            <url>{{ .Values.knox.hadoop.hdfsUIUrl }}</url> <!-- e.g. http://sandbox.hortonworks.com:9870 -->
             
             <!-- cf. https://issues.apache.org/jira/browse/KNOX-1644 and https://community.cloudera.com/t5/Support-Questions/HDP-3-1-0-Knox-proxy-HDFSUI-HTTP-401-Error/m-p/240282 -->
             <version>2.7.0</version> 
