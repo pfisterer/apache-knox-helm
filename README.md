@@ -87,6 +87,9 @@ git push origin master
 
 ## Changes
 
+Version 0.1.11
+- Change from deprecated `networking.k8s.io/v1beta1` to `networking.k8s.io/v1`
+
 Version 0.1.10
 - Update to Apache Knox 1.6.1
 
